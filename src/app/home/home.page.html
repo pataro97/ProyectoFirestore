@@ -7,6 +7,10 @@
 </ion-header>
 
 <ion-content>
+    <div class="ion-padding">
+      <ion-button color="primary" expand="full" (click)="navigateToEditar()">
+        editar - Navegación a través del controlador</ion-button>
+    </div>
   <ion-item>
     <ion-label>Título</ion-label>
     <ion-input [(ngModel)]="peliculaEditando.titulo"></ion-input>

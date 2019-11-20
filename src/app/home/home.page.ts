@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from "@angular/router";
 
 import { FirestoreService } from '../firestore.service';
 import { Pelicula } from '../pelicula';
@@ -10,17 +11,20 @@ import { Pelicula } from '../pelicula';
 })
 export class HomePage {
   peliculaEditando: Pelicula;
-
+  idPeliculaSelec: string;
   arrayColeccionPeliculas: any = [{
     id: "",
     data: {} as Pelicula
    }];
 
-  constructor(private firestoreService: FirestoreService) {
+  constructor(private firestoreService: FirestoreService, private router: Router) {
     // Crear una pelicula vacía
     this.peliculaEditando = {} as Pelicula;
     this.obtenerListaPeliculas();
+    
   }
+  
+  
 
   obtenerListaPeliculas(){
     this.firestoreService.consultar("pelicula").subscribe((resultadoConsultaPeliculas) => {
@@ -43,8 +47,6 @@ export class HomePage {
   }
 
 
-
-  idPeliculaSelec: string;
 
   selecPelicula(peliculaSelec) {
     console.log("Pelicula seleccionada: ");
@@ -72,4 +74,7 @@ export class HomePage {
     })
   }
 
+  navigateToEditar() {
+    this.router.navigate(["/editar/"+this.idPeliculaSelec]);
+  }
 }
