@@ -24,7 +24,7 @@
   <ion-button (click)="clicBotonModificar()">Modificar Pelicula</ion-button>
   <h1>LISTA DE PELICULAS</h1>
   <ion-list>
-    <ion-item *ngFor="let documentPelicula of arrayColeccionPeliculas" (click)="selecPelicula(documentPelicula)">
+    <ion-item *ngFor="let documentPelicula of arrayColeccionPeliculas" (click)="selecPelicula(documentPelicula)" (click)="navigateToEditar()">
       <ion-grid>
         <ion-row>
           <h2>{{documentPelicula.data.titulo}}</h2>
@@ -35,4 +35,9 @@
       </ion-grid>
     </ion-item>
   </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" id="nuevo" (click)="clicNuevo()">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

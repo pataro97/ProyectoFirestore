@@ -17,8 +17,9 @@
         <ion-label>Descripción</ion-label>
         <ion-input [(ngModel)]="document.data.descripcion"></ion-input>
       </ion-item>
-      <ion-button (click)="clicBotonBorrar()">Borrar Pelicula</ion-button>
-      <ion-button (click)="clicBotonModificar()">Modificar Pelicula</ion-button>
+
+      <ion-button (click)="clicBotonModificar()" id="modificar">Modificar Pelicula</ion-button>
+      <ion-button (click)="clicBotonBorrar()" id="borrar">Borrar Pelicula</ion-button>
 
   </ion-content>
 
