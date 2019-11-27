@@ -17,7 +17,7 @@ export class EditarPage implements OnInit {
 
   id = null;
   constructor(private activatedRoute: ActivatedRoute, private firestoreService: FirestoreService) { 
-    this.firestoreService.consultarPorId("pelicula", id).subscribe((resultado) => {
+    this.firestoreService.consultarPorId("pelicula", this.activatedRoute.snapshot.paramMap.get("id")).subscribe((resultado) => {
       // Preguntar si se hay encontrado un document con ese ID
       if(resultado.payload.data() != null) {
         this.document.id = resultado.payload.id
