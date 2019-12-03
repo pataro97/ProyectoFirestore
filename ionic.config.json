@@ -1,5 +1,7 @@
 {
   "name": "proyectoFirestore",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

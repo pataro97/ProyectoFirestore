@@ -61,7 +61,31 @@ export class EditarPage implements OnInit {
       this.router.navigate(["/home"]);
     })
   }
-  
+
+  async clicAlertBorrar() {
+    const alert = document.createElement('ion-alert');
+    alert.header = 'Alerta!';
+    alert.message = '¿Esta seguro de <strong>eliminar</strong> la película?';
+    alert.buttons = [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Borrar',
+        handler: () => {
+          console.log('Confirm Okay');
+          this.clicBotonBorrar()
+        }
+      }
+    ];
+    document.body.appendChild(alert);
+    return alert.present();
+  }
+
   clicBotonModificar() {
     if (this.id == "Nuevo") {
         this.firestoreService.insertar("pelicula", this.document.data).then(() => {
