@@ -107,6 +107,21 @@ export class EditarPage implements OnInit {
     })
   }
   }
+//Botones
+configurar() {
+  this.router.navigate(["/configurar/"])
+}
+inicio() {
+  this.router.navigate(["/home"]);
+}
+
+mapa() {
+  this.router.navigate(["/mapa/"]);
+}
+
+volver() {
+  this.router.navigate(["/home"]);
+}
 
 
 }

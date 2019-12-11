@@ -37,6 +37,7 @@ export class HomePage {
       })
     });
   }
+
   clicNuevo() {
     this.router.navigate(["/editar/Nuevo"]);
   }
@@ -72,4 +73,20 @@ export class HomePage {
   navigateToEditar() {
     this.router.navigate(["/editar/"+this.idPeliculaSelec]);
   }
+
+  //Botones
+  configurar() {
+    this.router.navigate(["/configurar/"])
+  }
+  inicio() {
+    this.router.navigate(["/home"]);
+  }
+  mapa() {
+    this.router.navigate(["/mapa/"]);
+  }
+
+  volver() {
+    this.router.navigate(["/home"]);
+  }
+  
 }
