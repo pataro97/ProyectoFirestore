@@ -70,6 +70,7 @@ export class HomePage {
   //   })
   // }
 
+  
   navigateToEditar() {
     this.router.navigate(["/editar/"+this.idPeliculaSelec]);
   }
