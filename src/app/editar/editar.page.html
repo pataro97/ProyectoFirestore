@@ -18,9 +18,21 @@
         <ion-input [(ngModel)]="document.data.descripcion"></ion-input>
       </ion-item>
 
+      <ion-item>
+        <ion-label>Imagen</ion-label>
+        <ion-input [(ngModel)]="document.data.imagen"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Año</ion-label>
+        <ion-input [(ngModel)]="document.data.anno"></ion-input>
+      </ion-item>
+
+
+      
       <ion-button (click)="clicBotonModificar()" id="modificar">Modificar Pelicula</ion-button>
       <ion-button (click)="clicAlertBorrar()" id="borrar">Borrar Pelicula</ion-button>
-
+      <ion-img  [src]="document.data.imagen"></ion-img>
   </ion-content>
 
   <ion-footer>
