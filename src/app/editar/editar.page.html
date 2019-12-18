@@ -13,6 +13,7 @@
         <ion-label>Titulo</ion-label>
         <ion-input [(ngModel)]="document.data.titulo"></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label>Descripción</ion-label>
         <ion-input [(ngModel)]="document.data.descripcion"></ion-input>
@@ -28,7 +29,11 @@
         <ion-input [(ngModel)]="document.data.anno"></ion-input>
       </ion-item>
 
-
+      <ion-item>
+        <ion-label>Director</ion-label>
+        <ion-input [(ngModel)]="document.data.director"></ion-input>
+      </ion-item>
+      
       
       <ion-button (click)="clicBotonModificar()" id="modificar">Modificar Pelicula</ion-button>
       <ion-button (click)="clicAlertBorrar()" id="borrar">Borrar Pelicula</ion-button>

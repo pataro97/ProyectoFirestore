@@ -3,4 +3,5 @@ export interface Pelicula {
     descripcion: string;
     imagen: string;
     anno: string;
+    director: string;
 }
