@@ -11,22 +11,25 @@
     <ion-item *ngFor="let documentPelicula of arrayColeccionPeliculas" (click)="selecPelicula(documentPelicula)" (click)="navigateToEditar()">
       <ion-grid>
         <ion-row>
-          <h2>{{documentPelicula.data.titulo}}</h2>
+          <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="8" size-xl="10">
+            <h2>{{documentPelicula.data.titulo}}</h2>
+            <p>{{documentPelicula.data.descripcion}}</p>
+          </ion-col>
+
+          <ion-col>
+            <ion-img  [src]="documentPelicula.data.imagen"></ion-img>
+          </ion-col>
+        </ion-row>
+
+        
+        <ion-row>
+          <p>Año: {{documentPelicula.data.anno}}</p>
         </ion-row>
         <ion-row>
-          <p>{{documentPelicula.data.descripcion}}</p>
-        </ion-row>
-        <ion-row>
-          <p>{{documentPelicula.data.imagen}}</p>
-        </ion-row>
-        <ion-row>
-          <p>{{documentPelicula.data.anno}}</p>
-        </ion-row>
-        <ion-row>
-          <p>{{documentPelicula.data.director}}</p>
+          <p>Director: {{documentPelicula.data.director}}</p>
         </ion-row>
         
-      </ion-grid>
+      </ion-grid >
     </ion-item>
   </ion-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" id="nuevo" (click)="clicNuevo()">
@@ -34,7 +37,7 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-</ion-content>
+</ion-content >
 <ion-footer>
   <ion-toolbar align="center">
     <ion-button (click)="inicio()"><ion-icon name="home"></ion-icon></ion-button>
