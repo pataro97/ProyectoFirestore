@@ -37,7 +37,8 @@
       
       <ion-button (click)="clicBotonModificar()" id="modificar">Modificar Pelicula</ion-button>
       <ion-button (click)="clicAlertBorrar()" id="borrar">Borrar Pelicula</ion-button>
-      <ion-img  [src]="document.data.imagen"></ion-img>
+      <ion-img  [src]="document.data.imagen" (click)="alertImagen()"></ion-img>
+      
   </ion-content>
 
   <ion-footer>
@@ -46,6 +47,10 @@
         <ion-button (click)="inicio()"><ion-icon name="home"></ion-icon></ion-button>
         <ion-button (click)="configurar()"><ion-icon name="build"></ion-icon></ion-button>
         <ion-button (click)="mapa()"><ion-icon name="map"></ion-icon></ion-button>
+        <ion-button id="snW" (click)="whatsappShare(document.data.titulo, document.data.imagen)"><ion-icon name="logo-whatsapp" ></ion-icon></ion-button>
+        <ion-button id="snT" (click)="twitterShare(document.data.titulo, document.data.imagen)"><ion-icon name="logo-twitter" ></ion-icon></ion-button>
+        <ion-button id="snF" (click)="facebookShare(document.data.titulo, document.data.imagen)"><ion-icon name="logo-facebook" ></ion-icon></ion-button>
+        <ion-button (click)="funCall()"><ion-icon name="call" ></ion-icon></ion-button>
       </ion-toolbar>
     </ion-footer>
     
