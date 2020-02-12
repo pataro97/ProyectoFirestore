@@ -17,12 +17,15 @@ export class HomePage {
     data: {} as Pelicula
    }];
 
+  pickupLocation: string;
   constructor(private firestoreService: FirestoreService, private router: Router) {
     // Crear una pelicula vacía
     this.peliculaEditando = {} as Pelicula;
     this.obtenerListaPeliculas();
     
   }
+  
+  
   
   
 
@@ -79,11 +82,9 @@ export class HomePage {
   configurar() {
     this.router.navigate(["/configurar/"])
   }
-  inicio() {
-    this.router.navigate(["/home"]);
-  }
-  mapa() {
-    this.router.navigate(["/mapa/"]);
+
+  info() {
+    this.router.navigate(['/info']);
   }
 
   volver() {
