@@ -7,12 +7,24 @@ import { ToastController, LoadingController } from '@ionic/angular';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { CallNumber } from '@ionic-native/call-number/ngx';
+
+import { AuthService } from '../services/auth.service';
+
+import { AngularFireAuth } from '@angular/fire/auth';
 @Component({
   selector: 'app-editar',
   templateUrl: './editar.page.html',
   styleUrls: ['./editar.page.scss'],
 })
 export class EditarPage implements OnInit {
+
+  
+  // mostrar inicio sesion
+  userEmail: String = "";
+  userUID: String = "";
+  isLogged: boolean;
+  btnId: boolean;
+
   document: any = {
     id: "",
     data: {} as Pelicula
@@ -25,8 +37,10 @@ export class EditarPage implements OnInit {
     private firestoreService: FirestoreService,
     private imagePicker: ImagePicker,
     private socialSharing: SocialSharing,
-    private callNumber: CallNumber,  
-    private router: Router) { 
+    private callNumber: CallNumber,
+    public afAuth: AngularFireAuth,
+    private authService: AuthService,
+    private router: Router) {
     this.firestoreService.consultarPorId("pelicula", this.activatedRoute.snapshot.paramMap.get("id")).subscribe((resultado) => {
       // Preguntar si se hay encontrado un document con ese ID
       if(resultado.payload.data() != null) {
@@ -39,11 +53,7 @@ export class EditarPage implements OnInit {
         this.document.data = {} as Pelicula;
       } 
       if (this.id == "Nuevo"){
-        document.getElementById("modificar").innerHTML = "Añadir";
-        document.getElementById("borrar").setAttribute("class", "invisible");
-        document.getElementById("snW").setAttribute("class", "invisible");
-        document.getElementById("snF").setAttribute("class", "invisible");
-        document.getElementById("snT").setAttribute("class", "invisible");
+        this.btnId = true;
       }
     });
   }
@@ -141,7 +151,7 @@ export class EditarPage implements OnInit {
           text: 'Modificar',
           handler: () => {
             console.log('Confirm Okay');
-            this.clicBotonBorrar()
+            this.uploadImagePicker()
           }
         }
       ];
@@ -252,20 +262,21 @@ async deleteFile(fileURL) {
 
 
 //Botones
-configurar() {
-  this.router.navigate(["/configurar/"])
-}
-
 inicio() {
   this.router.navigate(["/home"]);
 }
 
-mapa() {
-  this.router.navigate(["/mapa/"]);
-}
 
 volver() {
   this.router.navigate(["/home"]);
+}
+
+info() {
+  this.router.navigate(['/info']);
+}
+
+login() {
+  this.router.navigate(["/mainlogin"]);
 }
 
 //-------------------------Redes sociales
@@ -291,10 +302,26 @@ facebookShare(ti, im){
    this.socialSharing.shareViaFacebook(msg, null, null);
  }
 
-  funCall() {
-    this.callNumber.callNumber("684073639", true)
-    .then(res => console.log('Launched dialer!', res))
-    .catch(err => console.log('Error launching dialer', err));
-  }
+  
+ ionViewDidEnter() {
+  this.isLogged = false;
+  this.afAuth.user.subscribe(user => {
+    if(user){
+      this.userEmail = user.email;
+      this.userUID = user.uid;
+      this.isLogged = true;
+    }
+  })
+}
+
+logout(){
+  this.authService.doLogout()
+  .then(res => {
+    this.userEmail = "";
+    this.userUID = "";
+    this.isLogged = false;
+    console.log(this.userEmail);
+  }, err => console.log(err));
+}
 
 }

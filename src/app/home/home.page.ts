@@ -4,6 +4,12 @@ import { Router } from "@angular/router";
 import { FirestoreService } from '../firestore.service';
 import { Pelicula } from '../pelicula';
 
+
+import { AngularFireAuth } from '@angular/fire/auth';
+
+import { AuthService } from '../services/auth.service';
+import { LoadingController } from '@ionic/angular';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -12,13 +18,21 @@ import { Pelicula } from '../pelicula';
 export class HomePage {
   peliculaEditando: Pelicula;
   idPeliculaSelec: string;
+
+  // mostrar inicio sesion
+  userEmail: String = "";
+  userUID: String = "";
+  isLogged: boolean;
+
+
   arrayColeccionPeliculas: any = [{
     id: "",
     data: {} as Pelicula
    }];
 
   pickupLocation: string;
-  constructor(private firestoreService: FirestoreService, private router: Router) {
+  constructor(private firestoreService: FirestoreService, private router: Router,  public loadingCtrl: LoadingController,
+    private authService: AuthService, public afAuth: AngularFireAuth) {
     // Crear una pelicula vacía
     this.peliculaEditando = {} as Pelicula;
     this.obtenerListaPeliculas();
@@ -55,33 +69,12 @@ export class HomePage {
     this.peliculaEditando.descripcion = peliculaSelec.data.descripcion;
   }
 
-  // clicBotonBorrar() {
-  //   this.firestoreService.borrar("pelicula", this.idPeliculaSelec).then(() => {
-  //     // Actualizar la lista completa
-  //     this.obtenerListaPeliculas();
-  //     // Limpiar datos de pantalla
-  //     this.peliculaEditando = {} as Pelicula;
-  //   })
-  // }
-  
-  // clicBotonModificar() {
-  //   this.firestoreService.actualizar("pelicula", this.idPeliculaSelec, this.peliculaEditando).then(() => {
-  //     // Actualizar la lista completa
-  //     this.obtenerListaPeliculas();
-  //     // Limpiar datos de pantalla
-  //     this.peliculaEditando = {} as Pelicula;
-  //   })
-  // }
-
   
   navigateToEditar() {
     this.router.navigate(["/editar/"+this.idPeliculaSelec]);
   }
 
   //Botones
-  configurar() {
-    this.router.navigate(["/configurar/"])
-  }
 
   info() {
     this.router.navigate(['/info']);
@@ -90,5 +83,44 @@ export class HomePage {
   volver() {
     this.router.navigate(["/home"]);
   }
+
+  login() {
+    this.router.navigate(["/mainlogin"]);
+  }
   
+  
+  logout(){
+    this.authService.doLogout()
+    .then(res => {
+      this.userEmail = "";
+      this.userUID = "";
+      this.isLogged = false;
+      console.log(this.userEmail);
+    }, err => console.log(err));
+  }
+
+
+  // Mostrar usuario registrado
+
+  ionViewDidEnter() {
+    this.isLogged = false;
+    this.afAuth.user.subscribe(user => {
+      if(user){
+        this.userEmail = user.email;
+        this.userUID = user.uid;
+        this.isLogged = true;
+        // mostrar dentro del div el correo
+        document.getElementById("mostrarCorreo").innerHTML = "<p>"+user.email+"</p>";
+      }else {
+        // si no borrara el p
+        document.getElementById("mostrarCorreo").innerHTML = "";
+
+      }
+    })
+  }
+
+
+ 
+
+  // ------------------------------------
 }

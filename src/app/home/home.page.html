@@ -1,9 +1,33 @@
+<ion-fab horizontal="end"  edge>
+  <ion-button id="btnMenu">
+    <ion-icon name="menu"></ion-icon>
+  </ion-button>
+  <ion-fab-list>
+    <ion-fab-button color="light">
+      <ion-icon></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button (click)="info()" color="light">
+      <ion-icon name="paper"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button (click)="login()" color="light">
+      <ion-icon name="contact"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button (click)="logout()" color="light">
+      <ion-icon name="log-out"></ion-icon>
+    </ion-fab-button>
+    
+  </ion-fab-list>
+</ion-fab>
+
 <ion-header>
   <ion-toolbar>
     <ion-title>
       Películas
     </ion-title>
   </ion-toolbar>
+  <div id="mostrarCorreo"></div>
+  <!-- <p>Email: {{ userEmail }}</p>
+  <ion-button (click)="logout()">Log out</ion-button> -->
 </ion-header>
 
 <ion-content>
@@ -32,16 +56,10 @@
       </ion-grid >
     </ion-item>
   </ion-list>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" id="nuevo" (click)="clicNuevo()">
+  <ion-fab *ngIf="isLogged" vertical="bottom" horizontal="end" slot="fixed" id="nuevo" (click)="clicNuevo()">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content >
-<ion-footer>
-  <ion-toolbar align="center">
-    <ion-button (click)="configurar()"><ion-icon name="build"></ion-icon></ion-button>
-    <ion-button (click)="info()"><ion-icon name="map"></ion-icon></ion-button>
-  </ion-toolbar>
-</ion-footer>
 

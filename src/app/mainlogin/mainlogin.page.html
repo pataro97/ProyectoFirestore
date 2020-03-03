@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Main</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <p>Email: {{ userEmail }}</p>
+  <p>UID: {{ userUID }}</p>
+  <ion-button (click)="login()">Log in</ion-button>
+  <ion-button (click)="logout()">Log out</ion-button>
+</ion-content>

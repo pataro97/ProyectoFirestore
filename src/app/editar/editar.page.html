@@ -1,3 +1,26 @@
+<ion-fab horizontal="end"  edge>
+  <ion-button id="btnMenu">
+    <ion-icon name="menu"></ion-icon>
+  </ion-button>
+  <ion-fab-list>
+    <ion-fab-button color="light">
+      <ion-icon></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button (click)="inicio()" color="light">
+      <ion-icon name="home"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button (click)="info()" color="light">
+      <ion-icon name="paper"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button (click)="login()" color="light">
+      <ion-icon name="contact"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button (click)="logout()" color="light">
+      <ion-icon name="log-out"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
+
 <ion-header>
     <ion-toolbar>
       <ion-title>Pelicula</ion-title>
@@ -5,10 +28,10 @@
         <ion-back-button></ion-back-button>
       </ion-buttons>
     </ion-toolbar>
-  </ion-header>
+</ion-header>
 
-
-    <ion-content> 
+<!-- --------------------------------------------------------------------------------- logueado -->
+  <ion-content *ngIf="isLogged"> 
       <ion-item>
         <ion-label>Titulo</ion-label>
         <ion-input [(ngModel)]="document.data.titulo"></ion-input>
@@ -35,22 +58,85 @@
       </ion-item>
       
       
-      <ion-button (click)="clicBotonModificar()" id="modificar">Modificar Pelicula</ion-button>
-      <ion-button (click)="clicAlertBorrar()" id="borrar">Borrar Pelicula</ion-button>
+      <ion-button *ngIf="btnId" (click)="clicBotonModificar()" id="modificar">Añadir</ion-button>
+      <ion-button *ngIf="!btnId" (click)="clicBotonModificar()" id="modificar">Modificar Pelicula</ion-button>
+      <ion-button *ngIf="!btnId" (click)="clicAlertBorrar()" id="borrar">Borrar Pelicula</ion-button>
       <ion-img  [src]="document.data.imagen" (click)="alertImagen()"></ion-img>
+      
+      <!-- fab placed in the center of the content with a list on each side -->
+      <ion-fab *ngIf="!btnId" id="shareBtn">
+        <ion-fab-button>
+          <ion-icon name="share"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="end">
+          <ion-fab-button (click)="facebookShare(document.data.titulo, document.data.imagen)">
+            <ion-icon name="logo-facebook"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button (click)="twitterShare(document.data.titulo, document.data.imagen)">
+            <ion-icon name="logo-twitter"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button (click)="whatsappShare(document.data.titulo, document.data.imagen)">
+            <ion-icon name="logo-whatsapp"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
       
   </ion-content>
 
-  <ion-footer>
-      <ion-toolbar align="center">
-        <ion-button (click)="volver()"><ion-icon name="arrow-round-back"></ion-icon></ion-button>
-        <ion-button (click)="inicio()"><ion-icon name="home"></ion-icon></ion-button>
-        <ion-button (click)="configurar()"><ion-icon name="build"></ion-icon></ion-button>
-        <ion-button (click)="mapa()"><ion-icon name="map"></ion-icon></ion-button>
-        <ion-button id="snW" (click)="whatsappShare(document.data.titulo, document.data.imagen)"><ion-icon name="logo-whatsapp" ></ion-icon></ion-button>
-        <ion-button id="snT" (click)="twitterShare(document.data.titulo, document.data.imagen)"><ion-icon name="logo-twitter" ></ion-icon></ion-button>
-        <ion-button id="snF" (click)="facebookShare(document.data.titulo, document.data.imagen)"><ion-icon name="logo-facebook" ></ion-icon></ion-button>
-        <ion-button (click)="funCall()"><ion-icon name="call" ></ion-icon></ion-button>
-      </ion-toolbar>
-    </ion-footer>
+
+
+
+  <!-- ---------------------------------------------------------------------------- No logueado -->
+
+  <ion-content *ngIf="!isLogged"> 
+    <ion-item>
+      <ion-label>Titulo</ion-label>
+      <ion-input disabled [(ngModel)]="document.data.titulo"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Descripción</ion-label>
+      <ion-input disabled [(ngModel)]="document.data.descripcion"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Imagen</ion-label>
+      <ion-input disabled [(ngModel)]="document.data.imagen"></ion-input>
+    </ion-item>
     
+    <ion-item>
+      <ion-label>Año</ion-label>
+      <ion-input disabled [(ngModel)]="document.data.anno"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Director</ion-label>
+      <ion-input disabled [(ngModel)]="document.data.director"></ion-input>
+    </ion-item>
+    
+    
+    <ion-button disabled (click)="clicBotonModificar()" id="modificar">Modificar Pelicula</ion-button>
+    <ion-button disabled (click)="clicAlertBorrar()" id="borrar">Borrar Pelicula</ion-button>
+    <ion-img  [src]="document.data.imagen"></ion-img>
+    
+    <!-- fab placed in the center of the content with a list on each side -->
+    <ion-fab id="shareBtn">
+      <ion-fab-button>
+        <ion-icon name="share"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="end">
+        <ion-fab-button (click)="facebookShare(document.data.titulo, document.data.imagen)">
+          <ion-icon name="logo-facebook"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button (click)="twitterShare(document.data.titulo, document.data.imagen)">
+          <ion-icon name="logo-twitter"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button (click)="whatsappShare(document.data.titulo, document.data.imagen)">
+          <ion-icon name="logo-whatsapp"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+    
+</ion-content>
+    
+

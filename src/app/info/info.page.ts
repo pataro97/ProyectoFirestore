@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Map,tileLayer,marker} from 'leaflet';
 import { Router } from '@angular/router';
-
+import { CallNumber } from '@ionic-native/call-number/ngx';
 declare var L: any;
 
 @Component({
@@ -13,7 +13,7 @@ export class InfoPage  {
 map:Map;
   newMarker:any;
   address:string[];
-constructor(private router:Router) { }
+constructor(private router:Router, private callNumber: CallNumber  ) { }
   
   // The below function is added
   ionViewDidEnter(){
@@ -31,7 +31,7 @@ constructor(private router:Router) { }
         // marker ([36.7754292,-5.5608807]).addTo(this.map)
         // Lo podemos hacer de forma personalizada declarando L como any
         var myIcon = L.icon({
-          iconUrl: 'https://lh3.googleusercontent.com/proxy/c2nSaNKduQ3svBxpPf8pqS6VOYcWs1svJXz_98RfGjt_DUsr1Id492un-LtRu_SjS0-qfBRbC6yxdKt2oX0SI7GMoWBncH0DRPS-rGY1pEEW5dshKD82XY4',
+          iconUrl: 'https://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Ball-Azure-icon.png',
           iconSize: [50, 50],
           popupAnchor: [-3, -76],
           shadowSize: [68, 95],
@@ -45,5 +45,14 @@ constructor(private router:Router) { }
       }
       goBack(){
         this.router.navigate(["home"]);
+      }
+      funCall() {
+        this.callNumber.callNumber("684073639", true)
+        .then(res => console.log('Launched dialer!', res))
+        .catch(err => console.log('Error launching dialer', err));
+      }
+
+      inicio() {
+        this.router.navigate(["/home"]);
       }
 }
