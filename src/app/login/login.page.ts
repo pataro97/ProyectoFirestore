@@ -12,15 +12,15 @@ import { Router } from '@angular/router';
 export class LoginPage {
 
   value: any = {
-    email: "email",
-    password: "password"
+    email: "pabloas123@gmail.com",
+    password: "Ab_12345678"
   };
 
   validations_form: FormGroup;
   errorMessage: string = '';
 
   validation_messages = {
-   'email': [
+   '<email>': [
      { type: 'required', message: 'Email is required.' },
      { type: 'pattern', message: 'Please enter a valid email.' }
    ],

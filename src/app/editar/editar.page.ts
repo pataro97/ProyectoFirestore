@@ -276,7 +276,7 @@ info() {
 }
 
 login() {
-  this.router.navigate(["/mainlogin"]);
+  this.router.navigate(["/login"]);
 }
 
 //-------------------------Redes sociales
@@ -302,7 +302,13 @@ facebookShare(ti, im){
    this.socialSharing.shareViaFacebook(msg, null, null);
  }
 
-  
+ regularShare(ti, im){
+  let men = "Mira esta pelicula: \n"+ti+"\n"+im;
+  var msg = this.compilemsg(men);
+  this.socialSharing.share(msg, null, null, null);
+}
+
+  // Log in
  ionViewDidEnter() {
   this.isLogged = false;
   this.afAuth.user.subscribe(user => {
@@ -310,6 +316,12 @@ facebookShare(ti, im){
       this.userEmail = user.email;
       this.userUID = user.uid;
       this.isLogged = true;
+      // mostrar dentro del div el correo
+      document.getElementById("mostrarCorreo").innerHTML = "<p>"+user.email+"</p>";
+    }else {
+      // si no borrara el p
+      document.getElementById("mostrarCorreo").innerHTML = "";
+
     }
   })
 }

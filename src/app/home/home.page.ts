@@ -85,7 +85,7 @@ export class HomePage {
   }
 
   login() {
-    this.router.navigate(["/mainlogin"]);
+    this.router.navigate(["/login"]);
   }
   
   

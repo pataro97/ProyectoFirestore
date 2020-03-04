@@ -28,6 +28,7 @@
         <ion-back-button></ion-back-button>
       </ion-buttons>
     </ion-toolbar>
+    <p *ngIf="isLogged">{{ userEmail }}</p>
 </ion-header>
 
 <!-- --------------------------------------------------------------------------------- logueado -->
@@ -77,6 +78,9 @@
           </ion-fab-button>
           <ion-fab-button (click)="whatsappShare(document.data.titulo, document.data.imagen)">
             <ion-icon name="logo-whatsapp"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button (click)="regularShare(document.data.titulo, document.data.imagen)">
+            <ion-icon name="more"></ion-icon>
           </ion-fab-button>
         </ion-fab-list>
       </ion-fab>
@@ -133,6 +137,9 @@
         </ion-fab-button>
         <ion-fab-button (click)="whatsappShare(document.data.titulo, document.data.imagen)">
           <ion-icon name="logo-whatsapp"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button (click)="regularShare(document.data.titulo, document.data.imagen)">
+          <ion-icon name="more"></ion-icon>
         </ion-fab-button>
       </ion-fab-list>
     </ion-fab>
